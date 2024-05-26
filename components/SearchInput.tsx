@@ -23,9 +23,10 @@ const SearchInput: React.FC<ISearchInputProps> = ({
       />
       <Button
         buttonColor={Colors.light.primaryColor}
+        textColor={Colors.light.background}
         disabled={value.length === 0}
         style={styles.button}
-        mode='contained'
+        mode='text'
         onPress={onSearch}
       >
         Search

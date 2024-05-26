@@ -28,26 +28,25 @@ const DataTable: React.FC<IDataTableProps> = ({ cols, rows }) => {
   );
 
   return (
-    <Table testID='user-table'>
+    <Table testID='user-table' style={{ flex: 1 }}>
+      <Table.Header style={{ marginBottom: 5 }}>
+        {cols?.map((col, index) => (
+          <Table.Title
+            {...(col?.sorting && {
+              sortDirection: sortAscending ? 'ascending' : 'descending',
+              onPress: () => {
+                setSortAscending(!sortAscending);
+                onSort(col.accessor);
+              },
+            })}
+            key={index}
+            style={styles.row}
+          >
+            {col.title}
+          </Table.Title>
+        ))}
+      </Table.Header>
       <ScrollView>
-        <Table.Header style={{ marginBottom: 5 }}>
-          {cols?.map((col, index) => (
-            <Table.Title
-              {...(col?.sorting && {
-                sortDirection: sortAscending ? 'ascending' : 'descending',
-                onPress: () => {
-                  setSortAscending(!sortAscending);
-                  onSort(col.accessor);
-                },
-              })}
-              key={index}
-              style={styles.row}
-            >
-              {col.title}
-            </Table.Title>
-          ))}
-        </Table.Header>
-
         {sortedData?.map((row) => (
           <Table.Row
             testID='user-row'
